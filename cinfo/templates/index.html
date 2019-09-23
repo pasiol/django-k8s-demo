@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %} {% block content %}
+<h1>Django container info</h1>
+<p><em>Welcome to container info, Django Kubernetes demo website</em>!</p>
+<h2>{{ container_id }}</h2>
+<p>
+  Container on the pod {{ server_ip }} has got {{ percentage }}% of all
+  requests.
+</p>
+<div id="requests">
+  <h3>Container's requests</h3>
+  <table>
+    <tr>
+      <th>timestamp</th>
+      <th>user-agent</th>
+    </tr>
+    {% for row in requests %}
+    <tr>
+      <td>{{ row.timestamp }}</td>
+      <td>{{ row.user_agent }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
