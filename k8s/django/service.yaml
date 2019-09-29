@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: django-service
+spec:
+  selector:
+    pod: dk8ksdemo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 31111
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.39.100

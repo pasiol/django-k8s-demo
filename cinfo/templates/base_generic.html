@@ -20,15 +20,6 @@
     <div id="background">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-2">
-            {% block sidebar %}
-            <ul class="sidebar-nav">
-              <li><a href="https://www.djangoproject.com">Django</a></li>
-              <li><a href="https://www.kubernetes.io">Kubernetes</a></li>
-              <li><a href="https://www.docker.com">Docker</a></li>
-            </ul>
-            {% endblock %}
-          </div>
           <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
         </div>
       </div>

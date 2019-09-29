@@ -21,7 +21,7 @@ def index(request):
     this_container_requests = []
 
     for row in Request.objects.filter(container_id=settings.CONTAINER_ID):
-        r = {"timestamp": row.timestamp, "user_agent": row.user_agent}
+        r = {"timestamp": str(row.timestamp), "user_agent": row.user_agent}
 
         this_container_requests.append(r)
     server_ip = str(get_server_ip())

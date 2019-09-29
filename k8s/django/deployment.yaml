@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dk8sdemo
+  labels:
+    app: dk8sdemo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      pod: dk8ksdemo
+  template:
+    metadata:
+      labels:
+        pod: dk8ksdemo
+    spec:
+      containers:
+        - name: dk8sdemo
+          image: pasiol/dk8sdemo
+          imagePullPolicy: 'Always'
+          ports:
+            - containerPort: 8000
+          command: ['python']
+          args: ['manage.py', 'runserver', '0.0.0.0:8000', '--noreload']
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+            - name: POSTGRES_HOST
+              value: postgres-service
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                secretKeyRef:
+                  name: django-secrets
+                  key: clusterip

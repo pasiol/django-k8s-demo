@@ -9,4 +9,4 @@ COPY . .
 RUN chown -R django:django .
 RUN chown root:root ./dk8sdemo/settings.py
 USER django
-CMD python manage.py runserver 0.0.0.0:8000
+CMD python manage.py runserver 0.0.0.0:8000 --noreload
