@@ -20,8 +20,6 @@ spec:
           imagePullPolicy: 'Always'
           ports:
             - containerPort: 8000
-          command: ['python']
-          args: ['manage.py', 'runserver', '0.0.0.0:8000', '--noreload']
           env:
             - name: POSTGRES_USER
               valueFrom:

@@ -20,6 +20,23 @@ Stopping docker-compose
 
     docker-compose down
 
+## Minikube
+
+    minikube ip|base64
+
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: django-secrets
+    type: Opaque
+    data:
+      clusterip: MTkyLjE2OC4zOS44NQo=
+
+    kubectl create -f secrets.yaml
+
+    
+
+
 ## TODO
 
 - Instructions for minikube enviroment
