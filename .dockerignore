@@ -1,4 +1,5 @@
+.postgres-volume/
 __pycache__
 **/*.pyc
 k8s
-.postgres-volume
+.git
