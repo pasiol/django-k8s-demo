@@ -12,7 +12,8 @@ Deploying to Kubernetes cluster is slowly, so I made 'docker-compose' solution f
 
     git clone https://github.com/pasiol/Django-k8s-demo.git
     cd dk8sdemo
-    ./buildLocal.sh
+    docker-compose build && docker-compose up -d
+    docker-compose run web python manage.py migrate --noinput
 
 ## TODO
 
