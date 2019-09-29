@@ -11,9 +11,14 @@ Purpose of the app is learning how the Django app is able to run on Kubernetes c
 Deploying to Kubernetes cluster is slowly, so I made 'docker-compose' solution for debugging purposes.
 
     git clone https://github.com/pasiol/Django-k8s-demo.git
-    cd dk8sdemo
+    cd Django-k8s-demo/
     docker-compose build && docker-compose up -d
     docker-compose run web python manage.py migrate --noinput
+    firefox http://127.0.0.1:8000 &
+
+Stopping docker-compose
+
+    docker-compose down
 
 ## TODO
 
