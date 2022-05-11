@@ -1,2 +1,4 @@
 buildLocal.sh
 .vscode
+venv
+__pycache__
