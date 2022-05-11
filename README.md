@@ -74,3 +74,9 @@ Enabling Django service on the Minikube NodePort.
 ## Remarks
 
 - docker build-command tries to stat the root only .postgres-volume directory <https://github.com/docker/for-linux/issues/380>
+
+## Links
+
+Installing kustomize
+
+- https://kubectl.docs.kubernetes.io/installation/kustomize/source/

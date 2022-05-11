@@ -1,0 +1,11 @@
+resources:
+  - postgres/volume.yaml
+  - postgres/volume_claim.yaml
+  - postgres/secrets.yaml
+  - postgres/deployment.yaml
+  - postgres/service.yaml
+  - django/secrets.yaml
+  - django/deployment.yaml
+  - django/make_migrations.yaml
+  - django/migrate.yaml
+  - django/service.yaml

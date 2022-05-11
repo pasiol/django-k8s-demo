@@ -2,6 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: django-service
+  namespace: django-k8s-demo
 spec:
   selector:
     pod: dk8ksdemo
