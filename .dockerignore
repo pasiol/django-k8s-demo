@@ -1,5 +1,7 @@
 .postgres-volume/
 __pycache__
 **/*.pyc
-k8s
-.git
+manifests
+.git*
+*.png
+*.md
