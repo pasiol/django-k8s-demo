@@ -10,5 +10,4 @@ resources:
   - django/make_migrations.yaml
   - django/migrate.yaml
   - django/service.yaml
-  #- django/ingress.yaml
   - debugContainer.yaml
