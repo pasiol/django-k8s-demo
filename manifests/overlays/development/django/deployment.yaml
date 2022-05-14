@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: dk8sdemo
-          image: pasiol/dk8sdemo
-          imagePullPolicy: 'Always'
+          image: pasiol/dk8sdemo@sha256:7098e917de56b9c945f25a2636c2bb185612ab81e38822ce33efc39cbf139f3c
+          imagePullPolicy: 'IfNotPresent'
           ports:
             - containerPort: 8000
           env:

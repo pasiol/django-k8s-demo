@@ -1,4 +1,5 @@
 resources:
+  - ns.yaml
   - postgres/volume.yaml
   - postgres/volume_claim.yaml
   - postgres/secrets.yaml
@@ -9,3 +10,5 @@ resources:
   - django/make_migrations.yaml
   - django/migrate.yaml
   - django/service.yaml
+  #- django/ingress.yaml
+  - debugContainer.yaml

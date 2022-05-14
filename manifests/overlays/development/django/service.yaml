@@ -8,9 +8,6 @@ spec:
     pod: dk8ksdemo
   ports:
     - protocol: TCP
-      port: 80
       targetPort: 8000
-      nodePort: 31111
+      port: 8000
   type: LoadBalancer
-  externalIPs:
-    - 192.168.39.100
