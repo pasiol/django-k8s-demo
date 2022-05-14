@@ -34,7 +34,7 @@ def index(request):
     context = {
         "container_id": settings.CONTAINER_ID,
         "server_ip": server_ip,
-        "requests": this_container_requests,
+        "requests": reversed(this_container_requests),
         "percentage": round((containers_requests / all_requests) * 100, 1),
     }
 
