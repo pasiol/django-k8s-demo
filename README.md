@@ -1,12 +1,9 @@
 # Django Kubernetes Demo
 
-A simple Django app which calculates the percentage of requests that app has got.
+A simple Django app which calculates the percentage of requests per container.
 
-The container info module creates the UUID identifier for the app when it starting up. Every request is saved and also UUID of the app is saved. The URL '/container-info' showing percentage of the requests and listing of all requests, which has the same identifier.
-
+The info module creates the UUID for the starting container. /container-info endpoint displays the requests and percentage of total requests received by the container.
 ![Screenshot](./screenshot.png)
-
-Purpose of the app is learning how the Django app is able to run on Kubernetes cluster. The repository is part of the dev-ops course exercise.
 
 ## docker-compose enviroment for debugging
 
