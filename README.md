@@ -7,8 +7,6 @@ The info module creates the UUID for the starting container. /container-info end
 
 ## docker-compose enviroment for debugging
 
-Deploying to Kubernetes cluster is slowly, so I made 'docker-compose' solution for debugging purposes.
-
     git clone https://github.com/pasiol/Django-k8s-demo.git
     cd Django-k8s-demo/
     docker-compose build && docker-compose up -d
