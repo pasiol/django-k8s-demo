@@ -22,58 +22,9 @@ Stopping docker-compose
 
     docker-compose down
 
-## Minikube
+## deployment on the local k8s dev environment
 
-Installing Minikube inside the Debian Buster workstation. <https://www.server-world.info/en/note?os=Debian_10&p=kubernetes&f=1>
-
-    minikube start --vm-driver kvm2
-
-Launching the minikube dashboard.
-
-    minikube dashboard
-
-Deploying a Postgres-server into the Minikube cluster.  The issue in initializing Docker image of Postgres 11 in the cluster. May be deployment file is not compatible. Postgres Docker image  9.6.6 working fine.
-
-    kubectl create -f k8s/postgres/volume.yaml
-    kubectl create -f k8s/postgres/volume_claim.yaml
-    kubectl create -f k8s/postgres/secrets.yaml
-    kubectl create -f k8s/postgres/deployment.yaml
-    kubectl create -f k8s/postgres/service.yaml
-
-Revealing cluster IP-address for Django service. Put the cluster IP address into Django secrets file.
-
-    minikube ip|base64
-
-Django secrets file.
-
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: django-secrets
-    type: Opaque
-    data:
-      clusterip: MTkyLjE2OC4zOS44NQo=
-
-Deploying Django app and migrating changes on the database.
-
-    kubectl create -f k8s/django/secrets.yaml
-    kubectl create -f k8s/django/deployment.yaml
-    kubectl create -f k8s/django/migrate.yaml
-    kubectl create -f k8s/django/service.yaml
-
-Enabling Django service on the Minikube NodePort.
-
-    kubectl get services
-    minikube service django-service
-
-## TODO
-
-- Volume for Django.
-- nginx load balancer
-
-## Remarks
-
-- docker build-command tries to stat the root only .postgres-volume directory <https://github.com/docker/for-linux/issues/380>
+TODO
 
 ## Links
 

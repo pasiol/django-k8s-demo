@@ -2,3 +2,4 @@ buildLocal.sh
 .vscode
 venv
 __pycache__
+sketches
