@@ -5,4 +5,4 @@ manifests
 .git*
 *.png
 *.md
-sketches
+/images

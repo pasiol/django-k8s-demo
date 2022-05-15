@@ -3,7 +3,7 @@
 A simple Django app which calculates the percentage of requests per container.
 
 The info module creates the UUID for the starting container. /container-info endpoint displays the requests and percentage of total requests received by the container.
-![Screenshot](./screenshot.png)
+![Screenshot](./images/screenshot.png)
 
 ## docker-compose enviroment for debugging
 
