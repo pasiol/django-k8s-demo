@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: dk8sdemo
-          image: pasiol/dk8sdemo@sha256:8eceb202436fb8913894b8557ff75b9beb2de191743beb3d57ce54bd9b119fe2
+          image: pasiol/dk8sdemo@sha256:49ebeeb50e91e8a08da0102cd287a2fd50c448d8d0c82b41b4d6ba0084ed3421
           imagePullPolicy: 'IfNotPresent'
           ports:
             - containerPort: 8000
@@ -35,7 +35,4 @@ spec:
             - name: POSTGRES_HOST
               value: postgres-service
             - name: DJANGO_ALLOWED_HOSTS
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: clusterip
+              value: "10.0.2.1, 10.0.2.2"

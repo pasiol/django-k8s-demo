@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: dk8sdemo
       POSTGRES_DB: dk8sdemo
       POSTGRES_HOST: postgres
-      DJANGO_ALLOWED_HOSTS: '192.168.122.147'
+      DJANGO_ALLOWED_HOSTS: '192.168.122.147,10.0.2.1,10.0.2.2'
     command: python manage.py runserver 0.0.0.0:8000
 
     volumes:

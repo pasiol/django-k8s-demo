@@ -5,7 +5,6 @@ resources:
   - postgres/secrets.yaml
   - postgres/deployment.yaml
   - postgres/service.yaml
-  - django/secrets.yaml
   - django/deployment.yaml
   - django/make_migrations.yaml
   - django/migrate.yaml

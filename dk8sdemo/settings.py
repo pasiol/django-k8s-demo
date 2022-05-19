@@ -25,7 +25,13 @@ SECRET_KEY = ")v6^s#%!rv!t_3kg9ezepqm0t)db$=38si=)$ij9=a%hg7%z3g"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [str(os.getenv("DJANGO_ALLOWED_HOSTS")).rstrip(), "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+if os.getenv("DJANGO_ALLOWED_HOSTS") is not None:
+    if len(os.getenv("DJANGO_ALLOWED_HOSTS")) > 0:
+        if "," in os.getenv("DJANGO_ALLOWED_HOSTS"):
+            hosts = os.getenv("DJANGO_ALLOWED_HOSTS").split(",", -1)
+            for host in hosts:
+                ALLOWED_HOSTS.append(host.strip())
 
 # Application definition
 

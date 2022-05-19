@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: django
-          image: pasiol/dk8sdemo
+          image: pasiol/dk8sdemo@sha256:49ebeeb50e91e8a08da0102cd287a2fd50c448d8d0c82b41b4d6ba0084ed3421
           command: ['python', 'manage.py', 'migrate']
           env:
             - name: POSTGRES_USER
