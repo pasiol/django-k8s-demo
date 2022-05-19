@@ -32,6 +32,8 @@ if os.getenv("DJANGO_ALLOWED_HOSTS") is not None:
             hosts = os.getenv("DJANGO_ALLOWED_HOSTS").split(",", -1)
             for host in hosts:
                 ALLOWED_HOSTS.append(host.strip())
+        else:
+            ALLOWED_HOSTS.append(os.getenv("DJANGO_ALLOWED_HOSTS").strip())
 
 # Application definition
 
