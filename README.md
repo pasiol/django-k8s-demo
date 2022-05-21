@@ -11,7 +11,7 @@ The info module creates the UUID for the starting container. /container-info end
     cd Django-k8s-demo/
     docker-compose build && docker-compose up -d
     docker-compose run web python manage.py migrate --noinput
-    firefox http://127.0.0.1:8000 &
+    firefox http://127.0.0.1 &
 
 Stopping docker-compose
 
