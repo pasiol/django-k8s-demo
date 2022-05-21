@@ -1,14 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: django-k8s-ingress
+  name: ingress-django
   namespace: django-k8s-demo
 spec:
   rules:
-  #- host: django-k8s-demo.local
+  - host: django.local
     http:
       paths:
-      - path: /container-info
+      - path: /
         pathType: Prefix
         backend:
           service:

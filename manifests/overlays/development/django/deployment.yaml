@@ -35,9 +35,8 @@ spec:
             - name: POSTGRES_HOST
               value: postgres-service
             - name: DJANGO_ALLOWED_HOSTS
-              value: "10.0.2.1, 10.0.2.2"
+              value: "10.0.3.1"
           readinessProbe:
-            # an http probe
             httpGet:
               path: /readiness
               port: 8000
