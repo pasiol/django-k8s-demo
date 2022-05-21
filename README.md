@@ -19,7 +19,7 @@ Stopping docker-compose
 
 ## deployment on the local k8s dev environment
 
-TODO
+    kustomize build manifests/overlays/development/ | kubectl apply -f -
 
 ## Links
 
