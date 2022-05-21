@@ -20,6 +20,9 @@ Stopping docker-compose
 ## deployment on the local k8s dev environment
 
     kustomize build manifests/overlays/development/ | kubectl apply -f -
+    firefox http://10.0.3.1 &
+
+![Screenshot](./images/k8s_screenshot.png)
 
 ## Links
 
