@@ -1,6 +1,8 @@
 # Django Kubernetes Demo
 
-The app is a simple Django app that calculates the percentage of requests per container.
+Simple Django app that calculates the percentage of requests per container. Demonstrates how to run Django in Kubernetes environment.
+
+https://www.djangoproject.com/
 
 The info module creates a UUID for the starting container. /container-info endpoint displays the requests and percentage of total requests received by the container.
 ![Screenshot](./images/screenshot.png)
@@ -46,7 +48,7 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 
 ### setting up app
 
-The easiest way to install the application is with the customize command. The required specifications are under the manifests folder.
+The easiest way to install the application is with the customize command. The required specifications are under the manifests' folder.
 
     kustomize build manifests/overlays/development/ | kubectl apply -f -
     firefox http://10.0.3.1 &

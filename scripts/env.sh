@@ -1,0 +1,4 @@
+export POSTGRES_USER=dk8sdemo
+export POSTGRES_PASSWORD=dk8sdemo
+export POSTGRES_DB dk8sdemo
+export POSTGRES_HOST=localhost
