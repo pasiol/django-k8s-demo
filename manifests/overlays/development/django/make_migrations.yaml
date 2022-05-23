@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: django
-          image: pasiol/dk8sdemo@sha256:5a17e7905ad0246f0babb544d5a227f6a0dbdf0bd59a92b5d8254b6288fd6bb4
+          image: pasiol/dk8sdemo:dev@sha256:b32fee364deeeb21db2bac6ab98245b07c27ad8ded918460b27e4e08cf5e7b66
           command: ['python', 'manage.py', 'makemigrations']
           env:
             - name: POSTGRES_USER
@@ -26,11 +26,10 @@ spec:
             - name: POSTGRES_HOST
               value: postgres-service
           readinessProbe:
-            # an http probe
             httpGet:
               path: /readiness
               port: 8000
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             timeoutSeconds: 5
       restartPolicy: Never
   backoffLimit: 5

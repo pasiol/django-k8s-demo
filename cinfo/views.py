@@ -1,42 +1,38 @@
-import socket
 from django.shortcuts import render
 from django.conf import settings
-from cinfo.models import Request
-
-
-def get_server_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    ip = s.getsockname()[0]
-    s.close()
-    return ip
+from cinfo.models import Worker, Request
+import time
 
 
 def index(request):
+    try:
+        w = Worker.objects.get(worker_id=settings.WORKER_ID)
+    except Worker.DoesNotExist:
+        new_worker = Worker()
+        new_worker.worker_id = settings.WORKER_ID
+        new_worker.hostname = settings.HOSTNAME
+        new_worker.fqdn = settings.FQDN
+        new_worker.ip_address = settings.IP_ADDRESS
+        new_worker.mac_address = settings.MAC_ADDRESS
+        new_worker.save()
 
+    w = Worker.objects.get(worker_id=settings.WORKER_ID)
     new_request = Request()
     new_request.user_agent = request.headers["User-Agent"]
-    new_request.container_id = settings.CONTAINER_ID
+    new_request.worker_id = settings.WORKER_ID
     new_request.save()
-    this_container_requests = []
+    worker_requests = Request.objects.filter(worker_id=settings.WORKER_ID).order_by("-timestamp")[:40]
 
-    for row in Request.objects.filter(container_id=settings.CONTAINER_ID):
-        r = {"timestamp": str(row.timestamp), "user_agent": row.user_agent}
-
-        this_container_requests.append(r)
-    server_ip = str(get_server_ip())
-
-    containers_requests = len(
-        Request.objects.filter(container_id=settings.CONTAINER_ID)
-    )
-    all_requests = len(Request.objects.all())
+    count_of_worker_requests = Request.objects.filter(worker_id=settings.WORKER_ID).count()
+    count_of_all_requests = Request.objects.filter().count()
 
     context = {
-        "container_id": settings.CONTAINER_ID,
-        "server_ip": server_ip,
-        "requests": reversed(this_container_requests),
-        "percentage": round((containers_requests / all_requests) * 100, 1),
+        "worker_id": w.worker_id,
+        "ip_address": w.ip_address,
+        "mac_address": w.mac_address,
+        "hostname": w.hostname,
+        "requests": worker_requests,
+        "percentage_worker": round((count_of_worker_requests / count_of_all_requests) * 100, 1),
     }
 
     return render(request, "index.html", context=context)
-

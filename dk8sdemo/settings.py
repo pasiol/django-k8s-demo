@@ -130,4 +130,8 @@ USE_L10N = True
 
 STATIC_URL = "/container-info/static/"
 
-CONTAINER_ID = None
+WORKER_ID = None
+HOSTNAME = None
+FQDN = None
+IP_ADDRESS = None
+MAC_ADDRESS = None

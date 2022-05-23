@@ -3,3 +3,4 @@ psycopg2-binary
 pytz
 sqlparse
 uwsgi
+getmac
