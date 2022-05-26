@@ -1,24 +1,28 @@
 {% extends "base_generic.html" %} {% block content %}
-<h1>Django container info</h1>
-<p><em>Welcome to container info, Django Kubernetes demo website</em>!</p>
-<h2>{{ container_id }}</h2>
-<p>
-  Container ip: {{ ip_address }}, mac: {{ mac_address }} on pod {{ hostname }} has got {{ percentage_worker }}% of all
-  requests.
-</p>
-<div id="requests">
-  <h3>Container's requests</h3>
-  <table id="requests">
-    <tr>
-      <th>timestamp</th>
-      <th>user-agent</th>
-    </tr>
-    {% for row in requests %}
-    <tr>
-      <td>{{ row.timestamp }}</td>
-      <td>{{ row.user_agent }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
+    <h1>Django container info</h1>
+    <p><em>Welcome to container info, Django Kubernetes demo website</em>!</p>
+    <h2>{{ container_id }}</h2>
+    <p>
+        Container ip: {{ ip_address }}, mac: {{ mac_address }} on pod {{ hostname }} has got {{ percentage_worker }}% of
+        all
+        requests.
+    </p>
+    <p>
+        The app has got {{ count_of_last_minute_requests }} requests in the last minute.
+    </p>
+    <div id="requests">
+        <h3>Container's requests</h3>
+        <table id="requests">
+            <tr>
+                <th>timestamp</th>
+                <th>user-agent</th>
+            </tr>
+            {% for row in requests %}
+                <tr>
+                    <td>{{ row.timestamp }}</td>
+                    <td>{{ row.user_agent }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

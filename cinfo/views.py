@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from cinfo.models import Worker, Request
-import time
+import datetime
 
 
 def index(request):
@@ -25,14 +25,17 @@ def index(request):
 
     count_of_worker_requests = Request.objects.filter(worker_id=settings.WORKER_ID).count()
     count_of_all_requests = Request.objects.filter().count()
-
+    now = datetime.datetime.now()
+    count_of_last_minute_requests = Request.objects.filter(timestamp__gt=now - datetime.timedelta(minutes=1),
+                                                           timestamp__lt=now).count()
     context = {
         "worker_id": w.worker_id,
         "ip_address": w.ip_address,
         "mac_address": w.mac_address,
         "hostname": w.hostname,
         "requests": worker_requests,
-        "percentage_worker": round((count_of_worker_requests / count_of_all_requests) * 100, 1),
+        "percentage_worker": round((count_of_worker_requests / count_of_all_requests) * 100, 3),
+        "count_of_last_minute_requests": count_of_last_minute_requests,
     }
 
     return render(request, "index.html", context=context)

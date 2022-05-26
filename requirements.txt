@@ -4,3 +4,4 @@ pytz
 sqlparse
 uwsgi
 getmac
+django-debug-toolbar
