@@ -20,3 +20,6 @@ class Request(models.Model):
     user_agent = models.CharField(max_length=1024)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        indexes = [ models.Index(fields=["timestamp"]), models.Index(fields=["worker"])]
+
