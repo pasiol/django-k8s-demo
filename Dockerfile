@@ -1,4 +1,6 @@
-FROM python:3.10-slim
+FROM python:3.9-slim
+
+RUN apt update && apt upgrade -y
 
 # Create a group and user to run our app
 ARG APP_USER=appuser
@@ -57,10 +59,10 @@ EXPOSE 8000
 ENV UWSGI_WSGI_FILE=dk8sdemo/wsgi.py
 
 # Base uWSGI configuration (you shouldn't need to change these):
-ENV UWSGI_HTTP=:8000 UWSGI_MASTER=1 UWSGI_HTTP_AUTO_CHUNKED=1 UWSGI_HTTP_KEEPALIVE=1 UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy
+ENV UWSGI_HTTP=:8000 UWSGI_MASTER=1 UWSGI_HTTP_AUTO_CHUNKED=1 UWSGI_HTTP_KEEPALIVE=1 UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy UWSGI_HARAKIRI=120 UWSGI_VACUUM=1 UWSGI_MAX-REQUESTS=5000
 
 # Number of uWSGI workers and threads per worker (customize as needed):
-ENV UWSGI_WORKERS=1 UWSGI_THREADS=4
+ENV UWSGI_WORKERS=4 UWSGI_THREADS=2
 
 # uWSGI static file serving configuration (customize or comment out if not needed):
 ENV UWSGI_STATIC_MAP="/container-info/static/=/code/cinfo/static/" UWSGI_STATIC_EXPIRES_URI="/static/.*\.[a-f0-9]{12,}\.(css|js|png|jpg|jpeg|gif|ico|woff|ttf|otf|svg|scss|map|txt) 315360000"

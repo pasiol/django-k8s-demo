@@ -15,18 +15,11 @@
   Django generated worker id: {{ worker_id }}
 </p>
 <div id="requests">
-  <h3>Worker's requests</h3>
-  <table id="requests">
-    <tr>
-      <th>timestamp</th>
-      <th>user-agent</th>
-    </tr>
-    {% for row in requests %}
-    <tr>
-      <td>{{ row.timestamp }}</td>
-      <td>{{ row.user_agent }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+  <h3>The summary of requests</h3>
+  <p>The count of all saved requests: {{ count_of_all_requests }}</p>
+  <p>Count of the worker requests: {{ count_of_worker_requests }}</p>
+  <p>Percentage of the worker processed load: {{ percentage_worker }}</p>
+  <p>Count of the pod requests: {{ count_of_pod_requests }}</p>
+  <p>Percentage of the pod processed load: {{ percentage_pod }}</p>
 </div>
 {% endblock %}
