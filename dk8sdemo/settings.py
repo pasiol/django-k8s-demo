@@ -11,6 +11,24 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import socket
+import logging
+
+logger = logging.getLogger(__name__)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +41,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ")v6^s#%!rv!t_3kg9ezepqm0t)db$=38si=)$ij9=a%hg7%z3g"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", 'False').lower() in ('true', '1', 't')
+logger.debug(f"Debug mode: {DEBUG}")
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 if os.getenv("DJANGO_ALLOWED_HOSTS") is not None:
@@ -35,9 +54,13 @@ if os.getenv("DJANGO_ALLOWED_HOSTS") is not None:
         else:
             ALLOWED_HOSTS.append(os.getenv("DJANGO_ALLOWED_HOSTS").strip())
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+
+if DEBUG:
+    INTERNAL_IPS = [
+        socket.gethostbyname(socket.gethostname()),
+    ]
+else:
+    INTERNAL_IPS = []
 
 
 # Application definition
@@ -92,13 +115,13 @@ WSGI_APPLICATION = "dk8sdemo.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dk8sdemo",
+        "NAME": os.getenv("POSTGRES_DB"),
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": os.getenv("POSTGRES_HOST"),
         "PORT": os.getenv("POSTGRES_PORT", 5432),
         'OPTIONS': {
-            'connect_timeout': 3,
+            'connect_timeout': 90,
         }
     }
 }

@@ -1,4 +1,6 @@
-buildLocal.sh
+.idea
 .vscode
+
+buildLocal.sh
 venv
 __pycache__
