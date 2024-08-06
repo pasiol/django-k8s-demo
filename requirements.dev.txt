@@ -1,1 +1,1 @@
-pip-upgrader
+pip-review
