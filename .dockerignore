@@ -1,8 +1,0 @@
-.postgres-volume/
-__pycache__
-**/*.pyc
-manifests
-.git*
-*.png
-*.md
-/images
