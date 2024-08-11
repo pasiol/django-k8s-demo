@@ -1,3 +1,4 @@
+import django
 from django.db import IntegrityError, DatabaseError, transaction
 from django.shortcuts import render
 from django.conf import settings
@@ -38,6 +39,11 @@ def index(request):
     worker_requests = None
     return render(request, "index.html", context=context)
 
+def version(request):
+    context = {
+        "version": django.get_version()
+    }
+    return render(request, "version.html", context=context)
 
 def count(request):
     w = None
