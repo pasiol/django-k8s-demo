@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-blue
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 8000
+  selector:
+    app: web
+    deployment: blue

@@ -1,0 +1,100 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+    deployment: green
+  name: web-green
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+      deployment: green
+  template:
+    metadata:
+      labels:
+        app: web
+        deployment: green
+    spec:
+      containers:
+        - image: ghcr.io/pasiol/django-k8s-demo-web:dev
+          name: django-k8s-demo-web
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "40Mi"
+              cpu: "20m"
+            limits:
+              cpu: "80m"
+              memory: "80Mi"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: databaseName
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: host
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: allowedHosts
+            - name: DJANGO_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: debug
+      initContainers:
+        - name: db-migrate
+          image: ghcr.io/pasiol/django-k8s-demo-web:dev
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c", "python manage.py makemigrations && python manage.py migrate"]
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: databaseName
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: host
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: allowedHosts
+            - name: DJANGO_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: debug
