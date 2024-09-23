@@ -1,5 +1,6 @@
 .idea
 .vscode
+.postgres-volume
 
 buildLocal.sh
 venv
