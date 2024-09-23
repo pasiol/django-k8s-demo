@@ -8,7 +8,7 @@ services:
       - .postgres-volume:/var/lib/postgresql/data
   web:
     build: django_app/
-    image: ghcr.io/pasiol/django-k8s-demo-web:latest
+    image: ghcr.io/pasiol/django-k8s-demo-web:dev
     environment:
       POSTGRES_USER: dk8sdemo
       POSTGRES_PASSWORD: dk8sdemo
