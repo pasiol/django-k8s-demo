@@ -1,0 +1,44 @@
+name: Update Docker Digest in Green Deployment
+
+on:
+  push:
+    branches:
+      - feature/*
+
+jobs:
+  update-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_NAME="ghcr.io/pasiol/django-k8s-demo-web"
+          IMAGE_TAG="dev"
+          docker build django_app/. -t $IMAGE_NAME:$IMAGE_TAG
+          docker push $IMAGE_NAME:$IMAGE_TAG
+
+      - name: Get Docker Image Digest
+        run: |
+          IMAGE_NAME="ghcr.io/pasiol/django-k8s-demo-web"
+          IMAGE_TAG="dev"
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_NAME:$IMAGE_TAG)
+          echo "IMAGE_DIGEST=${DIGEST}" >> $GITHUB_ENV
+
+      - name: Update Deployment File with New Digest
+        run: |
+          sed -i "s|image:.*|image: $IMAGE_DIGEST|" deployments/blue-green/green-deployment.yaml
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add deployments/blue-green/green-deployment.yaml
+          git commit -m "Update Docker image digest to $IMAGE_DIGEST"
+          git push origin ${{ github.ref_name }}
