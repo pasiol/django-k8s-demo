@@ -9,3 +9,6 @@ updates:
     directory: "/django_app" # Location of package manifests
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "Django"
+        versions: [">=4.3"]
