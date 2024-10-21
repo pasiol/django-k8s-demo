@@ -9,7 +9,7 @@ idna==3.10
 idna==3.10
 packaging==24.1
 pip==24.2
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.10
 pytz==2024.2
 pytz==2024.2
 requests==2.32.3
