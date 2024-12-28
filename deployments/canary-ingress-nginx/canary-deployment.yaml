@@ -1,0 +1,112 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: django
+    app.kubernetes.io/instance: canary
+    app.kubernetes.io/version: "0.9.1"
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: django-k8s-demo
+    app.kubernetes.io/managed-by: kubectl
+  name: django-canary
+  namespace: canary-ingress-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: django
+      app.kubernetes.io/instance: canary
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: django
+        app.kubernetes.io/instance: canary
+    spec:
+      containers:
+        - image: ghcr.io/pasiol/django-k8s-demo-web@sha256:7f2768ba48d7a93bdaf520d34b2493856b8dfdb040e7ce5da8170b74a353066b
+          name: django-k8s-demo-web
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "40Mi"
+              cpu: "20m"
+            limits:
+              cpu: "80m"
+              memory: "80Mi"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: databaseName
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: host
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: allowedHosts
+            - name: DJANGO_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: debug
+      initContainers:
+        - name: db-migrate
+          image: ghcr.io/pasiol/django-k8s-demo-web@sha256:7f2768ba48d7a93bdaf520d34b2493856b8dfdb040e7ce5da8170b74a353066b
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "40Mi"
+              cpu: "20m"
+            limits:
+              cpu: "80m"
+              memory: "80Mi"
+          command: ["/bin/sh", "-c", "python manage.py makemigrations && python manage.py migrate"]
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: databaseName
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: host
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: allowedHosts
+            - name: DJANGO_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: django-config
+                  key: debug

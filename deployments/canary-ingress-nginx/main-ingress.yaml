@@ -1,0 +1,19 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+  namespace: canary-ingress-nginx
+spec:
+  ingressClassName: nginx 
+  rules:
+  - host: "dk8sdemo.local"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: main
+            port:
+              number: 80
