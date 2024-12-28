@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: django
-    app.kubernetes.io/instance: green
+    app.kubernetes.io/instance: blue
     app.kubernetes.io/version: "0.9.0"
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: django-k8s-demo
@@ -20,7 +20,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: django
-      app.kubernetes.io/instance: blue
+        app.kubernetes.io/instance: blue
     spec:
       containers:
         - image: ghcr.io/pasiol/django-k8s-demo-web@sha256:2ab50e7849e5139cc6205458fea26e0818ff162c77ae4ff8b589725b0477439a
