@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: django-k8s-demo
     app.kubernetes.io/managed-by: kubectl
-  name: frontend-green
+  name: django-green
 spec:
   replicas: 3
   selector:

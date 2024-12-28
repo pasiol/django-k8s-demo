@@ -11,6 +11,6 @@ spec:
       port: 80
       targetPort: 8000
   selector:
-    app: web
-    deployment: blue
+    app.kubernetes.io/name: django
+    app.kubernetes.io/instance: blue
 

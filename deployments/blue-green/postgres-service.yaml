@@ -10,4 +10,5 @@ spec:
       port: 5432
       targetPort: 5432
   selector:
-    app: postgresql-server
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/instance: server
