@@ -3,23 +3,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: web
-    deployment: blue
-  name: web-blue
+    app.kubernetes.io/name: django
+    app.kubernetes.io/instance: blue
+    app.kubernetes.io/version: "0.9.0"
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: django-k8s-demo
+    app.kubernetes.io/managed-by: kubectl
+  name: django-blue
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: web
-      deployment: blue
+      app.kubernetes.io/name: django
+      app.kubernetes.io/instance: blue
   template:
     metadata:
       labels:
-        app: web
-        deployment: blue
+        app.kubernetes.io/name: django
+        app.kubernetes.io/instance: blue
     spec:
       containers:
-        - image: ghcr.io/pasiol/django-k8s-demo-web@sha256:2ab50e7849e5139cc6205458fea26e0818ff162c77ae4ff8b589725b0477439a
+        - image: ghcr.io/pasiol/django-k8s-demo-web@sha256:7f2768ba48d7a93bdaf520d34b2493856b8dfdb040e7ce5da8170b74a353066b
           name: django-k8s-demo-web
           imagePullPolicy: IfNotPresent
           resources:
@@ -64,7 +68,7 @@ spec:
                   key: debug
       initContainers:
         - name: db-migrate
-          image: ghcr.io/pasiol/django-k8s-demo-web@sha256:2ab50e7849e5139cc6205458fea26e0818ff162c77ae4ff8b589725b0477439a
+          image: ghcr.io/pasiol/django-k8s-demo-web@sha256:7f2768ba48d7a93bdaf520d34b2493856b8dfdb040e7ce5da8170b74a353066b
           imagePullPolicy: IfNotPresent
           resources:
             requests:
