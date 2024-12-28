@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: green
     spec:
       containers:
-        - image: ghcr.io/pasiol/django-k8s-demo-web@sha256:c7c89946d5168048453af1039a4df928bce2a48989d0940a565c9bba8af113d6
+        - image: ghcr.io/pasiol/django-k8s-demo-web@sha256:cc5d7ec435fb5f6b5795702508e57240f8d6a0c76ff6b535bb07224a0cb9cd8f
           name: django-k8s-demo-web
           imagePullPolicy: IfNotPresent
           resources:
@@ -68,7 +68,7 @@ spec:
                   key: debug
       initContainers:
         - name: db-migrate
-          image: ghcr.io/pasiol/django-k8s-demo-web@sha256:c7c89946d5168048453af1039a4df928bce2a48989d0940a565c9bba8af113d6
+          image: ghcr.io/pasiol/django-k8s-demo-web@sha256:cc5d7ec435fb5f6b5795702508e57240f8d6a0c76ff6b535bb07224a0cb9cd8f
           imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c", "python manage.py makemigrations && python manage.py migrate"]
           env:
