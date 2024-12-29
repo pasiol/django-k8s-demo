@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-config
+  namespace: blue-green
 data:
   databaseName: dk8sdemo
   host: db

@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-public
+  namespace: blue-green
 spec:
   type: LoadBalancer
   ports:
