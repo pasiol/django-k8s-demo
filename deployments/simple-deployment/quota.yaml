@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  creationTimestamp: null
+  name: simple
+  namespace: simple-deployment
+spec:
+  hard:
+    limits.cpu: 500m
+    limits.memory: 500Mi
+status: {}
