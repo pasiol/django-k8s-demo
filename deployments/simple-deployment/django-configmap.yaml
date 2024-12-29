@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: django-config
-  namespace: blue-green
+  namespace: simple-deployment
 data:
   allowedHosts: "*"
   debug: "True"
