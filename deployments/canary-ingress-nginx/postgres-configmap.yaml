@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: canary-ingress-nginx
+data:
+  databaseName: dk8sdemo
+  host: db
