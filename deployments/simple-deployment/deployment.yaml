@@ -32,10 +32,24 @@ spec:
               memory: "40Mi"
               cpu: "20m"
             limits:
-              cpu: "80m"
+              cpu: "60m"
               memory: "80Mi"
           ports:
             - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 4
+            successThreshold: 1
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 30
           env:
             - name: POSTGRES_USER
               valueFrom:
