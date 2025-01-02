@@ -1,0 +1,20 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: toolbox-allow-to-django
+  namespace: simple-deployment
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: debug-pod
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/name: django
+      ports:
+        - protocol: TCP
+          port: 8000
