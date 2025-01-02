@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/managed-by: kubectl
 spec:
   containers:
-    - image: quay.io/almalinuxorg/9-base:latest
+    - image: ghcr.io/pasiol/debug-pod-k8s-demo@sha256:22f67916965085d915619dd356e225ba1152199708cca8a75acdd74a4e7903a7
       command:
         - sleep
         - "43200"
