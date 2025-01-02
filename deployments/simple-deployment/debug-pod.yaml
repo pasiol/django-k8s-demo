@@ -5,8 +5,8 @@ metadata:
   name: debug-pod
   namespace: simple-deployment
   labels:
-    app.kubernetes.io/name: almalinux
-    app.kubernetes.io/instance: base
+    app.kubernetes.io/name: debug-pod
+    app.kubernetes.io/instance: almalinux-base
     app.kubernetes.io/version: "9"
     app.kubernetes.io/component: debug-container
     app.kubernetes.io/part-of: django-k8s-demo

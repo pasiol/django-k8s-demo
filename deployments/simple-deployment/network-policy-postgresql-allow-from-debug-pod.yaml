@@ -1,0 +1,22 @@
+---
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: postgresql-allow-from-debug-pod
+  namespace: simple-deployment
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: server
+      app.kubernetes.io/name: postgresql
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: debug-pod
+      ports:
+        - protocol: TCP
+          port: 5432

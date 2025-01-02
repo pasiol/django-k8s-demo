@@ -5,7 +5,7 @@ metadata:
   name: simple
   namespace: simple-deployment
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - protocol: TCP
       name: http
