@@ -1,0 +1,3 @@
+FROM quay.io/almalinuxorg/9-base:latest
+RUN dnf update -y && \
+    dnf install -y postgresql vim dnsutils iputils
